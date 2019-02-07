@@ -1,0 +1,8 @@
+{
+  "name": "simple-server",
+  "version": "1.0.0",
+  "description": "A simple test server",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true
+}
