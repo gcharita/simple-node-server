@@ -46,6 +46,7 @@
         "tabWidth": 4
     },
     "jest": {
+        "testURL": "http://localhost",
         "transform": {
             "^.+\\.tsx?$": "ts-jest"
         },
