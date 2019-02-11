@@ -10,6 +10,7 @@
         "test": "jest",
         "build": "tsc",
         "build:watch": "tsc --watch",
+        "restart": "yarn build; yarn start",
         "postinstall": "yarn build",
         "precommit": "lint-staged; yarn build;",
         "prepush": "jest"
