@@ -1,7 +1,7 @@
 import * as bodyParser from "body-parser"
 import * as express from "express"
 import * as session from "express-session"
-import * as uuid from "uuid"
+import { v4 as uuidv4 } from "uuid"
 
 class ResponseObject {
     public id: string
@@ -23,17 +23,17 @@ app.use(
     session({
         cookie: {
             // expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * cookieExpirationDays),
-            httpOnly: true
+            httpOnly: true,
         },
-        genid: request => {
+        genid: (request) => {
             // tslint:disable-next-line:no-console
             console.log(`Genid request sessionID: ${request.sessionID}`)
-            return uuid() // use UUIDs for session IDs
+            return uuidv4() // use UUIDs for session IDs
         },
         name: "JSESSIONID",
         secret: "keyboard cat",
         resave: false,
-        saveUninitialized: true
+        saveUninitialized: true,
     })
 )
 
@@ -46,7 +46,7 @@ app.get("/test", (request, response) => {
     const object = new ResponseObject("1", "some name")
     response.set({
         "Content-Type": "application/json",
-        "Custom-Header": "Some-custom-header-value"
+        "Custom-Header": "Some-custom-header-value",
     })
     // response.status(400)
     response.json(object)
