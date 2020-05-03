@@ -58,20 +58,17 @@
     },
     "lint-staged": {
         "*.json": [
-            "yarn prettier --write",
-            "git add"
+            "yarn prettier --write"
         ],
         "*.ts": [
             "tslint --fix",
-            "yarn prettier --write",
-            "git add"
+            "yarn prettier --write"
         ],
         "*test.ts": [
             "jest -u"
         ],
         "*.md": [
-            "yarn prettier --write",
-            "git add"
+            "yarn prettier --write"
         ]
     },
     "husky": {
