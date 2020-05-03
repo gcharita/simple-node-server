@@ -11,9 +11,7 @@
         "build": "tsc",
         "build:watch": "tsc --watch",
         "restart": "yarn build; yarn start",
-        "postinstall": "yarn build",
-        "precommit": "lint-staged; yarn build;",
-        "prepush": "jest"
+        "postinstall": "yarn build"
     },
     "dependencies": {
         "@types/dotenv": "^8.2.0",
@@ -77,5 +75,11 @@
             "yarn prettier --write",
             "git add"
         ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged; yarn build;",
+            "pre-push": "jest"
+        }
     }
 }
