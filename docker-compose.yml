@@ -1,0 +1,12 @@
+version: "2"
+
+services:
+    simple-node-server:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: simple-node-server
+        container_name: simple_container
+        restart: unless-stopped
+        ports:
+            - "9090:8080"
