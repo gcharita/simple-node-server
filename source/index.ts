@@ -1,4 +1,3 @@
-import * as bodyParser from "body-parser"
 import * as express from "express"
 import * as session from "express-session"
 import { v4 as uuidv4 } from "uuid"
@@ -15,7 +14,7 @@ class ResponseObject {
 
 const app = express()
 app.set("port", 8080)
-app.use(bodyParser.json())
+app.use(express.json())
 
 const cookieExpirationDays = 1
 
@@ -45,7 +44,6 @@ app.get("/test", (request, response) => {
 
     const object = new ResponseObject("1", "some name")
     response.set({
-        "Content-Type": "application/json",
         "Custom-Header": "Some-custom-header-value",
     })
     // response.status(400)
