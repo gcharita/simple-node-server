@@ -1,4 +1,8 @@
 {
     "editor.formatOnSave": true,
-    "explorer.autoReveal": false
+    "explorer.autoReveal": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "eslint.validate": ["typescript"]
 }

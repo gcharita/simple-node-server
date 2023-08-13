@@ -25,7 +25,7 @@ app.use(
             httpOnly: true,
         },
         genid: (request) => {
-            // tslint:disable-next-line:no-console
+            // eslint-disable-next-line no-console
             console.log(`Genid request sessionID: ${request.sessionID}`)
             return uuidv4() // use UUIDs for session IDs
         },
@@ -33,13 +33,13 @@ app.use(
         secret: "keyboard cat",
         resave: false,
         saveUninitialized: true,
-    })
+    }),
 )
 
 app.get("/test", (request, response) => {
     const headers = JSON.stringify(request.headers, null, 4)
     const body = JSON.stringify(request.body, null, 4)
-    // tslint:disable-next-line:no-console
+    // eslint-disable-next-line no-console
     console.info(`Received request \nmethod: ${request.method} \nheaders: ${headers} \nbody: ${body}\n`)
 
     const object = new ResponseObject("1", "some name")
@@ -51,6 +51,6 @@ app.get("/test", (request, response) => {
 })
 
 app.listen(app.get("port"), () => {
-    // tslint:disable-next-line:no-console
+    // eslint-disable-next-line no-console
     console.info(`Started server at http://localhost:${app.get("port")}`)
 })
