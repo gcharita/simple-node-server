@@ -36,6 +36,12 @@ app.use(
     }),
 )
 
+app.get("/redirect", (request, response) => {
+    logRequest(request)
+
+    response.redirect("https://www.google.com")
+})
+
 app.get("/file", (request, response) => {
     logRequest(request)
 
