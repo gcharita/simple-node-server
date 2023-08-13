@@ -16,7 +16,7 @@ const app = express()
 app.set("port", 8080)
 app.use(express.json())
 
-const cookieExpirationDays = 1
+// const cookieExpirationDays = 1
 
 app.use(
     session({
@@ -36,11 +36,34 @@ app.use(
     }),
 )
 
-app.get("/test", (request, response) => {
-    const headers = JSON.stringify(request.headers, null, 4)
-    const body = JSON.stringify(request.body, null, 4)
-    // eslint-disable-next-line no-console
-    console.info(`Received request \nmethod: ${request.method} \nheaders: ${headers} \nbody: ${body}\n`)
+app.get("/file", (request, response) => {
+    logRequest(request)
+
+    // authentication middleware
+
+    const auth = { login: "yourlogin", password: "yourpassword" } // change this
+
+    // parse login and password from headers
+    const b64auth = (request.headers.authorization ?? "").split(" ")[1] || ""
+    const [login, password] = Buffer.from(b64auth, "base64").toString().split(":")
+
+    // Verify login and password are set and correct
+    if (login && password && login === auth.login && password === auth.password) {
+        // Access granted...
+
+        const file = `${__dirname}/feed_test.xml` // path to a file in dist directory
+        // response.status(400)
+        response.sendFile(file)
+        return
+    }
+
+    // Access denied...
+    response.set("WWW-Authenticate", 'Basic realm="401"') // change this
+    response.status(401).send("Authentication required.") // custom message
+})
+
+app.get("/json", (request, response) => {
+    logRequest(request)
 
     const object = new ResponseObject("1", "some name")
     response.set({
@@ -54,3 +77,11 @@ app.listen(app.get("port"), () => {
     // eslint-disable-next-line no-console
     console.info(`Started server at http://localhost:${app.get("port")}`)
 })
+
+// Helpers
+function logRequest(request: express.Request) {
+    const headers = JSON.stringify(request.headers, null, 4)
+    const body = JSON.stringify(request.body, null, 4)
+    // eslint-disable-next-line no-console
+    console.info(`Received request \nmethod: ${request.method} \nheaders: ${headers} \nbody: ${body}\n`)
+}
