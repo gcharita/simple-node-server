@@ -29,7 +29,9 @@
         "tabWidth": 4
     },
     "jest": {
-        "testURL": "http://localhost",
+        "testEnvironmentOptions": {
+            "url": "http://localhost"
+        },
         "transform": {
             "^.+\\.tsx?$": "ts-jest"
         },
